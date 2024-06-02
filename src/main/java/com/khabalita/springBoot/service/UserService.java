@@ -1,6 +1,5 @@
 package com.khabalita.springBoot.service;
 
-
 import com.khabalita.springBoot.dto.UserDto;
 import com.khabalita.springBoot.entities.User;
 import com.khabalita.springBoot.mapper.UserMapper;
@@ -31,6 +30,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public List<UserDto> listAllUsers() throws Exception{
         try{
             List<User> userList = userRepository.findAll();
@@ -44,6 +44,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public UserDto updateUser(Long id, UserDto userDto) throws Exception {
         try{
             User existingUser = userRepository.findById(id)
@@ -56,6 +57,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public boolean deleteUser(Long id) throws Exception{
         try{
             if(userRepository.existsById(id)){
@@ -69,6 +71,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public UserDto findUserById(Long id) throws Exception{
         try{
             User user = userRepository.findById(id)
