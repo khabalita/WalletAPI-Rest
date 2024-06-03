@@ -2,7 +2,6 @@ package com.khabalita.springBoot.mapper;
 
 
 import com.khabalita.springBoot.dto.UserDto;
-import com.khabalita.springBoot.dto.UserPassDto;
 import com.khabalita.springBoot.entities.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

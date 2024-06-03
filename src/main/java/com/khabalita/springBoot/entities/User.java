@@ -1,6 +1,7 @@
 package com.khabalita.springBoot.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 public class User extends Base {
     @Column(name = "name")
     private String name;
