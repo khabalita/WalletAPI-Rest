@@ -4,6 +4,7 @@ import com.khabalita.springBoot.dto.AccountDto;
 import com.khabalita.springBoot.dto.TransactionDto;
 import com.khabalita.springBoot.dto.UserDto;
 import com.khabalita.springBoot.entities.Account;
+import com.khabalita.springBoot.entities.Beneficiary;
 import com.khabalita.springBoot.entities.Transaction;
 import com.khabalita.springBoot.entities.User;
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,10 @@ public class AccountMapper {
         if (accountDto.getUserDto() != null) {
             User user = modelMapper.map(accountDto.getUserDto(), User.class);
             account.setUser(user);
+        }
+        if (accountDto.getBeneficiaryDto() != null) {
+            Beneficiary beneficiary = modelMapper.map(accountDto.getBeneficiaryDto(), Beneficiary.class);
+            account.setBeneficiary(beneficiary);
         }
         if (accountDto.getTransactionDtoList() != null) {
             List<Transaction> transactions = accountDto.getTransactionDtoList().stream()

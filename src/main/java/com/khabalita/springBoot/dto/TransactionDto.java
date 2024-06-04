@@ -1,5 +1,7 @@
 package com.khabalita.springBoot.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,10 @@ import java.util.Date;
 @Builder
 public class TransactionDto {
     private long id;
+    @NotNull
     private BigDecimal amount;
+    @NotBlank
     private Date date;
+    @NotBlank
     private String state;
 }

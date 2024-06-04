@@ -2,6 +2,7 @@ package com.khabalita.springBoot.controller;
 
 import com.khabalita.springBoot.dto.UserDto;
 import com.khabalita.springBoot.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws Exception{
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserDto userDto) throws Exception{
         userService.newUser(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) throws Exception{
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto) throws Exception{
         UserDto updatedUser = userService.updateUser(id, userDto);
         if(updatedUser != null){
             return ResponseEntity.status(HttpStatus.OK).body(updatedUser);

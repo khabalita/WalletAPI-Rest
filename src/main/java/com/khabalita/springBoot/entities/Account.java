@@ -26,6 +26,9 @@ public class Account implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    private Beneficiary beneficiary;
     @OneToMany
     private List<Transaction> transaction;
 }

@@ -2,12 +2,15 @@ package com.khabalita.springBoot.service;
 
 import com.khabalita.springBoot.dto.AccountDto;
 import com.khabalita.springBoot.entities.Account;
+import com.khabalita.springBoot.entities.Beneficiary;
 import com.khabalita.springBoot.entities.Transaction;
 import com.khabalita.springBoot.entities.User;
 import com.khabalita.springBoot.mapper.AccountMapper;
+import com.khabalita.springBoot.mapper.BeneficiaryMapper;
 import com.khabalita.springBoot.mapper.TransactionMapper;
 import com.khabalita.springBoot.mapper.UserMapper;
 import com.khabalita.springBoot.repository.AccountRepository;
+import com.khabalita.springBoot.repository.BeneficiaryRepository;
 import com.khabalita.springBoot.repository.TransactionRepository;
 import com.khabalita.springBoot.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +30,9 @@ public class AccountService {
     private UserRepository userRepository;
 
     @Autowired
+    private BeneficiaryRepository beneficiaryRepository;
+
+    @Autowired
     private TransactionRepository transactionRepository;
 
     @Autowired
@@ -34,6 +40,9 @@ public class AccountService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private BeneficiaryMapper beneficiaryMapper;
 
     @Autowired
     private TransactionMapper transactionMapper;
@@ -47,6 +56,10 @@ public class AccountService {
             if(account.getUser() != null){
                 User savedUser = userRepository.save(account.getUser());
                 account.setUser(savedUser);
+            }
+            if(account.getBeneficiary() != null){
+                Beneficiary savedBeneficiary =beneficiaryRepository.save(account.getBeneficiary());
+                account.setBeneficiary(savedBeneficiary);
             }
             if (account.getTransaction() != null && !account.getTransaction().isEmpty()) {
                 List<Transaction> savedTransactionList = account.getTransaction().stream()

@@ -16,5 +16,6 @@ public class AccountDto {
     private String type;
     private String accountBalance;
     private UserDto userDto;
+    private BeneficiaryDto beneficiaryDto;
     private List<TransactionDto> transactionDtoList;
 }

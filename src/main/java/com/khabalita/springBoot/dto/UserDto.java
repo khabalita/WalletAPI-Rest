@@ -1,6 +1,8 @@
 package com.khabalita.springBoot.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +17,12 @@ import java.math.BigDecimal;
 @Builder
 public class UserDto {
     private long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
+    @NotNull
     private BigDecimal totalBalance;
 }

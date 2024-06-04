@@ -21,7 +21,7 @@ public class Beneficiary implements Serializable {
     @Column(name = "name")
     private String name;
     @Column(name = "address")
-    private String Address;
+    private String address;
     @Column(name = "infoContact")
     private String informationContact;
 }
