@@ -5,13 +5,14 @@ import com.khabalita.springBoot.entities.Account;
 import com.khabalita.springBoot.entities.Transaction;
 import com.khabalita.springBoot.entities.User;
 import com.khabalita.springBoot.mapper.AccountMapper;
+import com.khabalita.springBoot.mapper.TransactionMapper;
 import com.khabalita.springBoot.mapper.UserMapper;
 import com.khabalita.springBoot.repository.AccountRepository;
 import com.khabalita.springBoot.repository.TransactionRepository;
 import com.khabalita.springBoot.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +35,13 @@ public class AccountService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private TransactionMapper transactionMapper;
+
 
 
     @Transactional
-    private Account newAccount(AccountDto accountDto) throws Exception{
+    public Account newAccount(AccountDto accountDto) throws Exception{
         try{
             Account account = accountMapper.AccountDtoToAccount(accountDto);
             if(account.getUser() != null){
@@ -86,10 +90,11 @@ public class AccountService {
             //Si la lista de transacciones es distinta de null y no esta vacia, la setea desde el mapper
             if (accountDto.getTransactionDtoList() != null && !accountDto.getTransactionDtoList().isEmpty()) {
                 List<Transaction> transactions = accountDto.getTransactionDtoList().stream().map(transactionDto -> {
-                    Transaction transaction = new Transaction();
-                    transaction.setAmount(transactionDto.getAmount());
-                    transaction.setDate(transactionDto.getDate());
-                    transaction.setState(transactionDto.getState());
+                    Transaction transaction = Transaction.builder()
+                            .amount(transactionDto.getAmount())
+                            .date(transactionDto.getDate())
+                            .state(transactionDto.getState())
+                            .build();
                     return transaction;
                 }).collect(Collectors.toList());
                 existingAccount.setTransaction(transactions);
@@ -117,7 +122,7 @@ public class AccountService {
             throw new Exception(e.getMessage());
         }
     }
-
+    @Transactional
     public AccountDto findAccountById(Long id) throws Exception{
         try{
             Account account = accountRepository.findById(id)

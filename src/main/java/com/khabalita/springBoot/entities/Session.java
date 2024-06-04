@@ -1,18 +1,24 @@
 package com.khabalita.springBoot.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "sessions")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Session extends Base{
+public class Session implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "startSession")
     private LocalDate startSession;
     @Column(name = "endSession")

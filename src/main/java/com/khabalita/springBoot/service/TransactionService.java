@@ -75,9 +75,9 @@ public class TransactionService {
     @Transactional
     public TransactionDto findTransactionById(Long id) throws Exception{
         try{
-            Transaction transacion = transactionRepository.findById(id)
+            Transaction transaction = transactionRepository.findById(id)
                     .orElseThrow(() -> new Exception("ID de transaccion no encontrado" + id));
-            return transactionMapper.transactionToTransactionDto(transacion);
+            return transactionMapper.transactionToTransactionDto(transaction);
         }catch (Exception e){
             throw new Exception("No se pudo traer la transaccion" + e.getMessage());
         }

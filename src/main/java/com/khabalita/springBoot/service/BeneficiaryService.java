@@ -1,6 +1,8 @@
 package com.khabalita.springBoot.service;
 
+import com.khabalita.springBoot.dto.AccountDto;
 import com.khabalita.springBoot.dto.BeneficiaryDto;
+import com.khabalita.springBoot.entities.Account;
 import com.khabalita.springBoot.entities.Beneficiary;
 import com.khabalita.springBoot.mapper.BeneficiaryMapper;
 import com.khabalita.springBoot.repository.BeneficiaryRepository;
@@ -69,6 +71,16 @@ public class BeneficiaryService {
             }
         }catch (Exception ex){
             throw new Exception ("No se pudo eliminar el beneficiario" + ex.getMessage());
+        }
+    }
+    @Transactional
+    public BeneficiaryDto findBeneficiaryById(Long id) throws Exception{
+        try{
+            Beneficiary beneficiary = beneficiaryRepository.findById(id)
+                    .orElseThrow(() -> new Exception("ID de beneficiario no encontrado" + id));
+            return beneficiaryMapper.beneficiaryToBeneficiaryDto(beneficiary);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
     }
 

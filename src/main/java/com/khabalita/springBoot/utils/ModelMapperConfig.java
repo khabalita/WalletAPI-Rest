@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ModelMapperConfig {
+
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();

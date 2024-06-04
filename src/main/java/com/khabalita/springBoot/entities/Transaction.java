@@ -1,19 +1,26 @@
 package com.khabalita.springBoot.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Transaction extends Base{
+public class Transaction implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "amount")
     private BigDecimal amount;
     @Column(name = "date")

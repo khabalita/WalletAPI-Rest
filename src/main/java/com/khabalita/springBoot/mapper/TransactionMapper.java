@@ -2,11 +2,11 @@ package com.khabalita.springBoot.mapper;
 
 import com.khabalita.springBoot.dto.TransactionDto;
 import com.khabalita.springBoot.entities.Transaction;
-import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Data
+@Service
 public class TransactionMapper {
     @Autowired
     private ModelMapper modelMapper;

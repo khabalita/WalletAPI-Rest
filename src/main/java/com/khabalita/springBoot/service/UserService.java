@@ -36,7 +36,7 @@ public class UserService {
             List<User> userList = userRepository.findAll();
             List<UserDto> userDtoList = new ArrayList<>();
             for(User user: userList){
-                userDtoList.add(userMapper.authorToAuthorDto(user));
+                userDtoList.add(userMapper.UserToUserDto(user));
             }
             return userDtoList;
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class UserService {
                     .orElseThrow(() -> new Exception("ID de user no encontrado" + id));
             existingUser.setName(userDto.getName());
             existingUser.setEmail(userDto.getEmail());
-            return userMapper.authorToAuthorDto(existingUser);
+            return userMapper.UserToUserDto(existingUser);
         }catch(Exception e){
             throw new Exception ("No se pudo actualizar el usuario" + e.getMessage());
         }
@@ -76,7 +76,7 @@ public class UserService {
         try{
             User user = userRepository.findById(id)
                     .orElseThrow(() -> new Exception("ID de autor no encontrado" + id));
-            return userMapper.authorToAuthorDto(user);
+            return userMapper.UserToUserDto(user);
         }catch (Exception e){
             throw new Exception("No se pudo traer el autor" + e.getMessage());
         }
